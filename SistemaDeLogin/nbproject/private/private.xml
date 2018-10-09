@@ -3,13 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Nathan/Documents/NetBeansProjects/SistemaDeLogin/src/java/br/grupointegrado/ads/sistema/CarrinhoServlet.java</file>
-            <file>file:/C:/Users/Nathan/Documents/NetBeansProjects/SistemaDeLogin/web/index.html</file>
             <file>file:/C:/Users/Nathan/Documents/NetBeansProjects/SistemaDeLogin/src/java/br/grupointegrado/ads/sistema/LoginServlet.java</file>
-            <file>file:/C:/Users/Nathan/Documents/NetBeansProjects/SistemaDeLogin/src/java/br/grupointegrado/ads/sistema/CaracterReservadoServlet.java</file>
-            <file>file:/C:/Users/Nathan/Documents/NetBeansProjects/SistemaDeLogin/src/java/br/grupointegrado/ads/sistema/PerfilServlet.java</file>
-            <file>file:/C:/Users/Nathan/Documents/NetBeansProjects/SistemaDeLogin/src/java/br/grupointegrado/ads/sistema/PagamentoServlet.java</file>
-            <file>file:/C:/Users/Nathan/Documents/NetBeansProjects/SistemaDeLogin/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Nathan/Documents/NetBeansProjects/SistemaDeLogin/src/java/br/grupointegrado/ads/sistema/filter/TrimFiltrer.java</file>
         </group>
     </open-files>
 </project-private>
