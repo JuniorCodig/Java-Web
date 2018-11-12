@@ -14,6 +14,11 @@
     
     Object mensagemErro = request.getAttribute("mensagem-erro");
     List<Produto> produtos = (List<Produto>) request.getAttribute("produtos");
+    
+    String buscarProduto = request.getParameter("buscar-produto");
+    if (buscarProduto == null){
+        buscarProduto = "";
+    }
 %>
 
 <!DOCTYPE html>
@@ -169,8 +174,9 @@
                 <form class="mb-3">
                     <div class="input-group">
                         <input type="text" 
-                               name="buscar-produto" 
+                               name="buscar-produto"
                                class="form-control" 
+                               value="<%= buscarProduto%>"
                                placeholder="Buscar por nome ou descrição">
                         <div class="input-group-append">
                             <button class="btn btn-outline-primary">

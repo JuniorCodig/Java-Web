@@ -60,7 +60,8 @@ public class ProdutoServlet extends HttpServlet {
         
         String buscaProduto = req.getParameter("buscar-produto");
         
-        List<Produto> produtos = dao.buscaTodos(null);
+        List<Produto> produtos = dao.buscaTodos(buscaProduto);
+        
         req.setAttribute("produtos", produtos);
 
         RequestDispatcher dispatcher
