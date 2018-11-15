@@ -104,7 +104,7 @@
                     if (mensagemErro != null){
                 %>
                 <div class="alert alert-danger" role="alert">
-                    <%= mensagemErro %>
+                    <%= mensagemErro%>
                 </div>
                 <%
                     }
