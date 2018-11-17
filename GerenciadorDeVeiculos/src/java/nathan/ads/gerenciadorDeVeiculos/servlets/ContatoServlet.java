@@ -31,9 +31,9 @@ public class ContatoServlet extends HttpServlet {
         
         String mensagemErro = validaContato(req);
         
-           
-                
-                Contato contato = new Contato();
+           if (mensagemErro == null){
+               
+               Contato contato = new Contato();
                 
                 try {
                     contato.setNome(req.getParameter("contato-nome"));
@@ -58,6 +58,9 @@ public class ContatoServlet extends HttpServlet {
                 }
             
                 resp.sendRedirect("/veiculos/home");
+           }
+                
+                
                 
             /*} else {
                 
