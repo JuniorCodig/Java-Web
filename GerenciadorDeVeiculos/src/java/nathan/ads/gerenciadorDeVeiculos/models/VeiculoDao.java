@@ -2,6 +2,7 @@ package nathan.ads.gerenciadorDeVeiculos.models;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,19 +26,62 @@ public class VeiculoDao {
 
     public void inserir(Veiculo veiculo) throws SQLException {
         
-        String sql = "INSERT INTO veiculos (id_veiculo, nm_veiculo, ano_modelo, ano_fabrica, km_veiculo, vl_veiculo,"
-                    + "tp_combustivel, id_categoria, desc_veiculo)";
+        String sql = "INSERT INTO veiculos (nm_veiculo, ano_modelo, ano_fabrica, km_veiculo, vl_veiculo,"
+                    + "tp_combustivel, id_categoria, imagem , desc_veiculo)"
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         PreparedStatement pstmt = conexao.prepareStatement(sql);
-        pstmt.setInt(1, veiculo.getVeiculoId());
-        pstmt.setString(2, veiculo.getNomeVeiculo());
-        pstmt.setInt(3, veiculo.getAnoModelo());
-        pstmt.setInt(4, veiculo.getAnoFabricacao());
-        pstmt.setInt(5, veiculo.getKmVeiculo());
-        pstmt.setDouble(6, veiculo.getValorVeiculo());
-        pstmt.setString(7, veiculo.getTipoCombustivel());
-        pstmt.setInt(8, veiculo.getCatVeiculo());
+        pstmt.setString(1, veiculo.getNomeVeiculo());
+        pstmt.setInt(2, veiculo.getAnoModelo());
+        pstmt.setInt(3, veiculo.getAnoFabricacao());
+        pstmt.setInt(4, veiculo.getKmVeiculo());
+        pstmt.setDouble(5, veiculo.getValorVeiculo());
+        pstmt.setString(6, veiculo.getTipoCombustivel());
+        pstmt.setInt(7, veiculo.getCatVeiculo());
+        pstmt.setString(8, veiculo.getImgVeiculo());
         pstmt.setString(9, veiculo.getDescricao());
+        
+        pstmt.execute();
+    }
+    
+    public List<Veiculo> getAll() throws SQLException{
+        String sql = "SELECT * FROM veiculos";
+        
+        try {
+            PreparedStatement statement = conexao.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            
+            List<Veiculo> veiculos = new ArrayList<>();
+            
+            if(result.first()){
+                do {
+                    Veiculo veiculo = getVeiculoByResult(result);
+                    veiculos.add(veiculo);
+                } while(result.next());
+            }
+            
+        } catch (Exception e) {
+        }
+        
+        return veiculos;
+    }
+    
+    public static Veiculo getVeiculoByResult(ResultSet result) throws SQLException{
+        
+        Veiculo veiculo = new Veiculo();
+        
+        veiculo.setVeiculoId(result.getInt("id_veiculo"));
+        veiculo.setNomeVeiculo(result.getString("nm_veiculo"));
+        veiculo.setAnoFabricacao(result.getInt("ano_fabrica"));
+        veiculo.setAnoModelo(result.getInt("ano_modelo"));
+        veiculo.setKmVeiculo(result.getInt("km_veiculo"));
+        veiculo.setValorVeiculo(result.getDouble("vl_veiculo"));
+        veiculo.setTipoCombustivel(result.getString("tp_combustivel"));
+        veiculo.setCatVeiculo(result.getInt("id_categoria"));
+        veiculo.setImgVeiculo(result.getString("imagem"));
+        veiculo.setDescricao(result.getString("desc_veiculo"));
+        
+        return veiculo;
     }
 
     public Veiculo buscaPorId(long id) {
@@ -61,18 +105,9 @@ public class VeiculoDao {
 
     public List<Veiculo> buscaTodos(String termoBusca) {
         
-        if (termoBusca == null || termoBusca.isEmpty()) {
-            return veiculos;
-        }
-        List<Veiculo> produtosEncontrados = new ArrayList<>();
-        for (Veiculo veiculo : veiculos) {
-            if (veiculo.getNomeVeiculo().contains(termoBusca)
-                    || veiculo.getDescricao().contains(termoBusca)) {
-                produtosEncontrados.add(veiculo);
-            }
-        }
         
-        return produtosEncontrados;
+        
+        return null;
     }
     
     public static Veiculo getVeiculoByRequest(HttpServletRequest req) {

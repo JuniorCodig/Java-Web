@@ -147,6 +147,8 @@
             <div class="dropdown-divider"></div>
 
             <form name="form-anunciar" onsubmit="return validarFormulario()">
+                
+                <form action="upload" method="POST" enctype="multipart/formData">
 
                 <div class="form-row">
                     <div class="col-md-8 col-lg-7 col-xl-6">
