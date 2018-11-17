@@ -58,17 +58,13 @@ public class ContatoServlet extends HttpServlet {
                 }
             
                 resp.sendRedirect("/veiculos/home");
-           }
-                
-                
-                
-            /*} else {
+            }else {
                 
                 req.setAttribute("contato", mensagemErro);
             
                 RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/paginas/contato.jsp");
                 dispatcher.forward(req, resp);
-            }*/
+            }
         
     }
 

@@ -1,4 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+  String mensagemErro = (String) request.getAttribute("error");
+%>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -144,6 +149,17 @@
     <main class="container-fluid">
         <div class="conteudo col-sm-12 col-md-11 col-lg-10">
             <h3>Preencha os dados do anúncio</h3>
+                <%
+                    if (mensagemErro != null){
+                %>
+                <div class="alert alert-danger" role="alert">
+                    <%= mensagemErro%>
+                </div>
+                <%
+                    }
+                %>
+            
+            
             <div class="dropdown-divider"></div>
 
             <form name="form-anunciar" onsubmit="return validarFormulario()">

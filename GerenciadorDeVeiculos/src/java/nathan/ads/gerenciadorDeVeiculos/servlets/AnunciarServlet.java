@@ -38,14 +38,15 @@ public class AnunciarServlet extends HttpServlet {
             try {
                 
                 if (veiculo.getVeiculoId() > 0) {
-                    //Se não, inserir novo produto.
-                    dao.inserir(veiculo);
-                } else{
-                    //se o produto ja possui ID, deve atualizar.
+                    
                     dao.atualizar(veiculo);
+                } else{
+                    
+                    dao.inserir(veiculo);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+                req.setAttribute("error", "Não foi possivel gravar no banco");
             }
     }
     
