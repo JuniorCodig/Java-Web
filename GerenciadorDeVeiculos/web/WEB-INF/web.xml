@@ -8,6 +8,7 @@
         <filter-name>ConexaoFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    
     <servlet>
         <servlet-name>AnuncioServlet</servlet-name>
         <servlet-class>nathan.ads.gerenciadorDeVeiculos.servlets.AnuncioServlet</servlet-class>

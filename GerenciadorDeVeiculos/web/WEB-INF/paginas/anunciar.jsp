@@ -38,7 +38,7 @@
                 inputTitulo.classList.add('is-valid');
             }
             
-            if(!validaNumber(inputAnoFabricacao.value, 1890, 2019)) {
+            if(!validaNumber(inputAnoFabricacao.value, 1885, 2019)) {
                 formValido = false;
                 inputAnoFabricacao.classList.add('is-invalid');
                 inputAnoFabricacao.classList.remove('is-valid');
@@ -47,7 +47,7 @@
                 inputAnoFabricacao.classList.add('is-valid');
             }
             
-            if(!validaNumber(inputAnoModelo.value, 1890, 2019)) {
+            if(!validaNumber(inputAnoModelo.value, 1885, 2019)) {
                 formValido = false;
                 inputAnoModelo.classList.add('is-invalid');
                 inputAnoModelo.classList.remove('is-valid');
@@ -119,7 +119,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-            <a class="navbar-brand" href="home">VEÍCULOS</a>
+            <a class="navbar-brand" href="home">SoCarrinhos</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

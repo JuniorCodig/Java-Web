@@ -9,10 +9,11 @@ public class Veiculo {
     private String nomeVeiculo;
     private Integer anoFabricacao;
     private Integer anoModelo;
-    private long kmVeiculo;
+    private Integer kmVeiculo;
     private double valorVeiculo;
     private String tipoCombustivel;
-    private String catVeiculo;
+    private Integer catVeiculo;
+    private String imgVeiculo;
     private String descricao;
 
     public Integer getVeiculoId() {
@@ -47,14 +48,14 @@ public class Veiculo {
         this.anoModelo = anoModelo;
     }
 
-    public long getKmVeiculo() {
+    public Integer getKmVeiculo() {
         return kmVeiculo;
     }
 
-    public void setKmVeiculo(long kmVeiculo) {
+    public void setKmVeiculo(Integer kmVeiculo) {
         this.kmVeiculo = kmVeiculo;
     }
-    
+
     public double getValorVeiculo() {
         return valorVeiculo;
     }
@@ -71,14 +72,22 @@ public class Veiculo {
         this.tipoCombustivel = tipoCombustivel;
     }
 
-    public String getCatVeiculo() {
+    public Integer getCatVeiculo() {
         return catVeiculo;
     }
 
-    public void setCatVeiculo(String catVeiculo) {
+    public void setCatVeiculo(Integer catVeiculo) {
         this.catVeiculo = catVeiculo;
     }
+    
+    public String getImgVeiculo() {
+        return imgVeiculo;
+    }
 
+    public void setImgVeiculo(String imgVeiculo) {
+        this.imgVeiculo = imgVeiculo;
+    }
+    
     public String getDescricao() {
         return descricao;
     }
@@ -86,4 +95,6 @@ public class Veiculo {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    
 }

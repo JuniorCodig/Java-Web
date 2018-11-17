@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Anúncios de Veículos</title>
+    <title>SoCarrinhos Veículos</title>
 
     <link rel="stylesheet" type="text/css" href="css/fontawesome.all.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -23,7 +23,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-            <a class="navbar-brand" href="home">VEÍCULOS</a>
+            <a class="navbar-brand" href="home">SoCarrinhos</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

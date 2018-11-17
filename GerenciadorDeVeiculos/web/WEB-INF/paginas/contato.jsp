@@ -1,4 +1,13 @@
+<%@page import="nathan.ads.gerenciadorDeVeiculos.models.Contato"%>
+<%@page import="nathan.ads.gerenciadorDeVeiculos.utils.JavaMailApp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    JavaMailApp enviarMail = new JavaMailApp();
+            
+    String mensagemErro = (String) request.getAttribute("contato");
+%>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -60,7 +69,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-            <a class="navbar-brand" href="home">VEÍCULOS</a>
+            <a class="navbar-brand" href="home">SoCarrinhos</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -83,7 +92,16 @@
 
     <main class="container-fluid">
         <div class="conteudo col-sm-12 col-md-11 col-lg-10">
-            <h3>Preencha o formulário para entrar em contato com o maior site de anúncios do Brasil</h3>
+            <h3>Preencha o formulário para entrar em contato com a SoCarrinhos Veículos.</h3>
+                <%
+                    if (mensagemErro != null){
+                %>
+                <div class="alert alert-danger" role="alert">
+                    <%= mensagemErro%>
+                </div>
+                <%
+                    }
+                %>
             <div class="dropdown-divider"></div>
 
             <form name="form-contato" method="POST" onsubmit="return validarFormulario()">
@@ -92,7 +110,7 @@
                     <div class="col-md-8 col-lg-7 col-xl-6">
                         <div class="form-group">
                             <label for="contato-nome">Nome completo</label>
-                            <input type="text" class="form-control" id="contato-nome" placeholder="Seu nome">
+                            <input type="text" class="form-control" name="contato-nome" id="contato-nome" placeholder="Seu nome">
                             <div class="invalid-feedback">
                                 Informe seu nome completo.
                             </div>
@@ -104,7 +122,7 @@
                     <div class="col-md-8 col-lg-7 col-xl-6">
                         <div class="form-group">
                             <label for="contato-email">E-mail</label>
-                            <input type="email" class="form-control" id="contato-email" placeholder="Seu e-mail" value="">
+                            <input type="email" class="form-control" name="contato-email" id="contato-email" placeholder="Seu e-mail" value="">
                             
                             <div class="invalid-feedback">
                                 Informe seu e-mail de contato.
@@ -117,7 +135,7 @@
                     <div class="col-lg-8 col-xl-7">
                         <div class="form-group">
                             <label for="contato-mensagem">Mensagem</label>
-                            <textarea class="form-control" id="contato-mensagem" placeholder="Escreva sua mensagem aqui..."></textarea>
+                            <textarea class="form-control" name="contato-mensagem" id="contato-mensagem" placeholder="Escreva sua mensagem aqui..."></textarea>
                             <div class="invalid-feedback">
                                 Informe sua mensagem.
                             </div>

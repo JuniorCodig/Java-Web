@@ -12,10 +12,13 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import nathan.ads.gerenciadorDeVeiculos.models.Contato;
  
 public class JavaMailApp
 {
-      public static void main(String[] args) {
+        public static void sendEmail(Contato contato) {
+            
+            
             Properties props = new Properties();
             /** Parâmetros de conexão com servidor Gmail */
             props.put("mail.smtp.host", "smtp.gmail.com");
@@ -41,11 +44,11 @@ public class JavaMailApp
                   message.setFrom(new InternetAddress("nathansantos3211@gmail.com")); //Remetente
  
                   Address[] toUser = InternetAddress //Destinatário(s)
-                             .parse("bot.prouni@gmail.com");  
+                             .parse("socarrinhosveiculos@gmail.com");  
  
                   message.setRecipients(Message.RecipientType.TO, toUser);
-                  message.setSubject("Enviando email com JavaMail");//Assunto
-                  message.setText("Enviei este email utilizando JavaMail com minha conta GMail!");
+                  message.setSubject("Contato - SoCarrinhos");//Assunto
+                  message.setText("Mensagem de " + contato.getNome() + " - ( " + contato.getEmail() + ") : " + contato.getMensagem());
                   /**Método para enviar a mensagem criada*/
                   Transport.send(message);
  
