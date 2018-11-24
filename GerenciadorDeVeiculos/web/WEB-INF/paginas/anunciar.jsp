@@ -1,7 +1,12 @@
+<%@page import="nathan.ads.gerenciadorDeVeiculos.models.Categoria"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
   String mensagemErro = (String) request.getAttribute("error");
+  
+  List<Categoria> categorias = (List<Categoria>) request.getAttribute("categorias");
+  
 %>
 
 <!DOCTYPE html>
@@ -124,7 +129,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-            <a class="navbar-brand" href="home">SoCarrinhos</a>
+            <a class="navbar-brand" href="index">SoCarrinhos</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -132,7 +137,7 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="home">Início</a>
+                        <a class="nav-link" href="index">Início</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="anunciar">Anunciar</a>
@@ -162,15 +167,14 @@
             
             <div class="dropdown-divider"></div>
 
-            <form name="form-anunciar" onsubmit="return validarFormulario()">
-                
-                <form action="upload" method="POST" enctype="multipart/formData">
+            <form name="form-anunciar" enctype="multipart/form-data" accept-charset="utf-8"
+                      method="POST" onsubmit="return validarFormulario()">
 
                 <div class="form-row">
                     <div class="col-md-8 col-lg-7 col-xl-6">
                         <div class="form-group">
                             <label for="anuncio-titulo">Título</label>
-                            <input type="text" class="form-control" id="anuncio-titulo" placeholder="Passat TSI 211CV Revisado 3º Dono">
+                            <input type="text" name="anuncio-titulo" class="form-control" id="anuncio-titulo" placeholder="Passat TSI 211CV Revisado 3º Dono">
                             <div class="invalid-feedback">
                                 Informe o título do anúncio.
                             </div>
@@ -182,7 +186,7 @@
                     <div class="col-6 col-md-4 col-lg-3 col-xl-2">
                         <div class="form-group">
                             <label for="anuncio-ano-fabricacao">Ano de fabricação</label>
-                            <input type="number" step="1" class="form-control" id="anuncio-ano-fabricacao" placeholder="2016">
+                            <input type="number" name="anuncio-ano-fabricacao" step="1" class="form-control" id="anuncio-ano-fabricacao" placeholder="2016">
                             <div class="invalid-feedback">
                                 Informe o ano de fabricação do veículo.
                             </div>
@@ -191,7 +195,7 @@
                     <div class="col-6 col-md-4 col-lg-3 col-xl-2">
                         <div class="form-group">
                             <label for="anuncio-ano-modelo">Ano do modelo</label>
-                            <input type="number" step="1" class="form-control" id="anuncio-ano-modelo" placeholder="2017">
+                            <input type="number" name="anuncio-ano-modelo" step="1" class="form-control" id="anuncio-ano-modelo" placeholder="2017">
                             <div class="invalid-feedback">
                                 Informe o ano do modelo do veículo.
                             </div>
@@ -204,7 +208,7 @@
                         <div class="form-group">
                             <label for="anuncio-quilometragem">Quilometragem</label>
                             <div class="input-group">
-                                <input type="number" step="1" class="form-control" id="anuncio-quilometragem"
+                                <input type="number" name="anuncio-quilometragem" step="1" class="form-control" id="anuncio-quilometragem"
                                     placeholder="34000">
                                 <div class="input-group-append">
                                     <span class="input-group-text">Km</span>
@@ -222,7 +226,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">R$</span>
                                 </div>
-                                <input type="number" step="1" class="form-control" id="anuncio-valor" placeholder="119990">
+                                <input type="number" name="anuncio-valor" step="1" class="form-control" id="anuncio-valor" placeholder="119990">
                                 <div class="input-group-append">
                                     <span class="input-group-text">,00</span>
                                 </div>
@@ -239,7 +243,7 @@
                         <div class="form-group">
                             <!-- Os tipos de combustíveis podem ser fixados no código -->
                             <label for="anuncio-combustivel">Tipo de combustível</label>
-                            <select class="form-control" id="anuncio-combustivel">
+                            <select name="anuncio-combustivel" class="form-control" id="anuncio-combustivel">
                                 <option value="GASOLINA">Gasolina</option>
                                 <option value="ETANOL">Etanol</option>
                                 <option value="FLEX">Flex</option>
@@ -252,18 +256,20 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="form-row">
                     <div class="col-md-8 col-lg-7 col-xl-6">
                         <div class="form-group">
                             <!-- As categorias devem ser carregadas do banco de dados -->
                             <label for="anuncio-categoria">Categoria</label>
-                            <select class="form-control" id="anuncio-categoria">
-                                <option value="1">Carros, vans e utilitários</option>
-                                <option value="2">Motos</option>
-                                <option value="3">Caminhões</option>
-                                <option value="4">Ônibus</option>
-                                <option value="5">Barcos e aeronaves</option>
+                            <select name="anuncio-categoria" class="form-control" id="anuncio-categoria">
+                                <%
+                                    for (Categoria cat : categorias) {
+                                %>
+                                <option value="<%= cat.getCategoriaId() %>"><%= cat.getCategoriaNome()%></option>
+                                <%
+                                    }
+                                %>
                             </select>
                             <div class="invalid-feedback">
                                 Selecione a categoria do veículo.
@@ -271,13 +277,13 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="form-row">
                     <div class="col-lg-8 col-xl-7">
                         <div class="form-group">
                             <label for="anuncio-imagem">Imagem</label>
                             <div class="custom-file">
-                                <input type="file" accept="image/jpg,image/jpeg,image/png" class="custom-file-input" id="anuncio-imagem">
+                                <input type="file" accept="image/jpg,image/jpeg,image/png" class="custom-file-input" name="anuncio-imagem" id="anuncio-imagem">
                                 <label class="custom-file-label" for="anuncio-imagem">Selecionar arquivo</label>
                                 <div class="invalid-feedback">
                                     Selecione uma foto do veículo.
@@ -291,7 +297,7 @@
                     <div class="col-lg-8 col-xl-7">
                         <div class="form-group">
                             <label for="anuncio-descricao">Descrição</label>
-                            <textarea class="form-control" id="anuncio-descricao" placeholder="Carro em ótimas condições..."></textarea>
+                            <textarea class="form-control" name="anuncio-descricao" id="anuncio-descricao" placeholder="Carro em ótimas condições..."></textarea>
                             <div class="invalid-feedback">
                                 Informe a descrição do anúncio.
                             </div>
@@ -299,9 +305,9 @@
                     </div>
                 </div>
 
-                <a href="/index.html" class="btn">Cancelar</a>
+                <a href="index" class="btn">Cancelar</a>
                 <button type="submit" class="btn btn-primary">Anunciar</button>
-
+              
             </form>
 
         </div>

@@ -3,16 +3,29 @@ package nathan.ads.gerenciadorDeVeiculos.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import nathan.ads.gerenciadorDeVeiculos.dao.CategoriaDao;
+import nathan.ads.gerenciadorDeVeiculos.models.Arquivo;
 import nathan.ads.gerenciadorDeVeiculos.models.Veiculo;
-import nathan.ads.gerenciadorDeVeiculos.models.VeiculoDao;
+import nathan.ads.gerenciadorDeVeiculos.dao.VeiculoDao;
+import nathan.ads.gerenciadorDeVeiculos.models.Categoria;
+import nathan.ads.gerenciadorDeVeiculos.utils.ServletUtil;
 import nathan.ads.gerenciadorDeVeiculos.utils.Validations;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
 
 /**
  * @author Nathan
@@ -22,33 +35,77 @@ public class AnunciarServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     
+        Connection conexao = (Connection) req.getAttribute("conexao");
+        
+        List<Categoria> categorias = new ArrayList<>();
+        CategoriaDao dao = new CategoriaDao(conexao);
+        
+        try {
+            categorias = dao.getAll();
+            req.setAttribute("categorias", categorias);
+        } catch (SQLException ex) {
+            Logger.getLogger(AnunciarServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
         RequestDispatcher dispatcher
                 = req.getRequestDispatcher("/WEB-INF/paginas/anunciar.jsp");
-        dispatcher.forward(req, resp); 
+        dispatcher.forward(req, resp);
         
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
-        Connection conexao = (Connection) req.getAttribute("conexao");
-        Veiculo veiculo = VeiculoDao.getVeiculoByRequest(req);
+        String mensagemErro = validaAnuncio(req);
         
-        VeiculoDao dao = new VeiculoDao(conexao);
-            try {
-                
-                if (veiculo.getVeiculoId() > 0) {
-                    
-                    dao.atualizar(veiculo);
-                } else{
-                    
-                    dao.inserir(veiculo);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                req.setAttribute("error", "Não foi possivel gravar no banco");
-            }
+        Veiculo veiculo = new Veiculo();
+        try {
+            Map<String, Object> parameters = ServletUtil.recuperaParametrosMultipart(req);
+            
+            String docName = ServletUtil.gravarArquivo( (Arquivo) parameters.get("anuncio-imagem"));
+           
+            veiculo.setNomeVeiculo( (String) parameters.get("anuncio-titulo"));
+            veiculo.setAnoFabricacao(Long.parseLong((String) parameters.get("anuncio-ano-fabricacao")));
+            veiculo.setAnoModelo(Long.parseLong((String) parameters.get("anuncio-ano-modelo")));
+            veiculo.setKmVeiculo(Long.parseLong((String) parameters.get("anuncio-quilometragem")));
+            veiculo.setValorVeiculo(Long.parseLong((String) parameters.get("anuncio-valor")));
+            veiculo.setTipoCombustivel((String) parameters.get("anuncio-combustivel"));
+            veiculo.setCatVeiculo(Long.parseLong((String) parameters.get("anuncio-categoria")));
+            veiculo.setImgVeiculo(docName);
+            veiculo.setDescricao((String) parameters.get("anuncio-descricao"));
+            veiculo.setDataHora(new Date());
+            
+            System.out.println("Veiculo construido");
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            req.setAttribute("error", "Erro ao cadastrar o veiculo");
+            
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/paginas/anunciar.jsp");
+            dispatcher.forward(req, resp);
+        }
+        
+        try {
+            Connection conexao = (Connection) req.getAttribute("conexao");
+            VeiculoDao dao = new VeiculoDao(conexao);
+            dao.inserir(veiculo);
+            
+            System.out.println("Salvo no banco de dados");
+        } catch (Exception e) {
+            req.setAttribute("error", "Não foi possivel salvar no bancos de dados" + e.getMessage());
+            
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/paginas/anunciar.jsp");
+            dispatcher.forward(req, resp);
+        }
+        
+        req.setAttribute("sucesso", "Seu anuncio foi salvo com exito.");
+            
+        resp.sendRedirect("index");
+        
+     
     }
+    
     
     private String validaAnuncio(HttpServletRequest req){
         

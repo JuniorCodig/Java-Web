@@ -1,4 +1,12 @@
+<%@page import="java.util.List"%>
+<%@page import="nathan.ads.gerenciadorDeVeiculos.models.Veiculo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    Veiculo vei = (Veiculo) request.getAttribute("veiculo");
+    
+    List<Veiculo> veiculos = (List<Veiculo>) request.getAttribute("veiculos");
+%>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -15,7 +23,7 @@
 
     <script>
         function abrirAnuncio(anuncioId) {
-            window.location = "anuncio.html?anuncio=" + anuncioId;
+            window.location = "anuncio?anuncio=" + anuncioId;
         }
     </script>
 </head>
@@ -23,7 +31,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-            <a class="navbar-brand" href="home">SoCarrinhos</a>
+            <a class="navbar-brand" href="index">SoCarrinhos</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -31,7 +39,7 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="home">Início</a>
+                        <a class="nav-link" href="index">Início</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="anunciar">Anunciar</a>
@@ -81,104 +89,39 @@
                         </ul>
                     </nav>
                 </div>
-
+                
                 <div class="col">
                     <h3>Veículos anunciados</h3>
                     <table class="table table-hover">
-                        <tr class="tabela-veiculos-linha" onclick="abrirAnuncio(1)">
+                        <%
+                            for (Veiculo v : veiculos) {
+                        %>
+                        <tr class="tabela-veiculos-linha" onclick="abrirAnuncio(<%= v.getVeiculoId()%>)">
                             <td class="tv-col-imagem">
-                                <img src="images/576814036262839.jpg">
+                                <img src="imagem?caminho=<%= v.getImgVeiculo() %>">
                             </td>
                             <td class="informacoes-anuncio">
                                 <div class="row">
                                     <div class="col descricao-anuncio">
                                         <p>
-                                            Bmw 320i - 2015 - 34.000 km | Câmbio: automático |
-                                            Gasolina
+                                            <%= v.getNomeVeiculo() %> - <%= v.getAnoModelo() %> - <%= v.getKmVeiculo() %> | Câmbio: automático |
+                                            <%= v.getTipoCombustivel()%>
                                         </p>
                                     </div>
                                     <div class="col-sm-auto valor-anuncio">
-                                        <p>R$ 119.990</p>
+                                        <p> R$ <%= v.getValorVeiculo() %></p>
                                     </div>
                                     <div class="col-sm-auto data-hora-anuncio">
                                         <p>
-                                            10/09/2018 <br />
-                                            17:55
+                                            <%= v.getDataHora() %>
                                         </p>
                                     </div>
                                 </div>
                             </td>
                         </tr>
-                        <tr class="tabela-veiculos-linha" onclick="abrirAnuncio(2)">
-                            <td class="tv-col-imagem">
-                                <img src="images/488817006229252.jpg">
-                            </td>
-                            <td class="informacoes-anuncio">
-                                <div class="row">
-                                    <div class="col descricao-anuncio">
-                                        <p>
-                                            Passat tsi 211 cv revisado 3º dono - 34.000 km | Câmbio: automático |
-                                            Gasolina
-                                        </p>
-                                    </div>
-                                    <div class="col-sm-auto valor-anuncio">
-                                        <div>R$ 119.990</div>
-                                    </div>
-                                    <div class="col-sm-auto data-hora-anuncio">
-                                        <p>
-                                            10/09/2018 <br />
-                                            17:55
-                                        </p>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="tabela-veiculos-linha" onclick="abrirAnuncio(3)">
-                            <td class="tv-col-imagem">
-                                <img src="images/585815038078078.jpg">
-                            </td>
-                            <td class="informacoes-anuncio">
-                                <div class="row">
-                                    <div class="col descricao-anuncio">
-                                        <p>
-                                            Passat Branco - 34.000 km | Câmbio: automático | Gasolina
-                                        </p>
-                                    </div>
-                                    <div class="col-sm-auto valor-anuncio">
-                                        <div>R$ 119.990</div>
-                                    </div>
-                                    <div class="col-sm-auto data-hora-anuncio">
-                                        <p>
-                                            10/09/2018 <br />
-                                            17:55
-                                        </p>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="tabela-veiculos-linha" onclick="abrirAnuncio(4)">
-                            <td class="tv-col-imagem">
-                                <img src="images/782804083333935.jpg">
-                            </td>
-                            <td class="informacoes-anuncio">
-                                <div class="row">
-                                    <div class="col descricao-anuncio">
-                                        <p>
-                                            Ford Ranger - 34.000 km | Câmbio: automático | Gasolina
-                                        </p>
-                                    </div>
-                                    <div class="col-sm-auto valor-anuncio">
-                                        <p>R$ 119.990</p>
-                                    </div>
-                                    <div class="col-sm-auto data-hora-anuncio">
-                                        <p>
-                                            10/09/2018 <br />
-                                            17:55
-                                        </p>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                        <% 
+                           }
+                        %>
                     </table>
 
                 </div>

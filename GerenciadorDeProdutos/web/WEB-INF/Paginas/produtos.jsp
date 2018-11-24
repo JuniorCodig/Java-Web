@@ -16,6 +16,7 @@
     List<Produto> produtos = (List<Produto>) request.getAttribute("produtos");
     
     String buscarProduto = request.getParameter("buscar-produto");
+    
     if (buscarProduto == null){
         buscarProduto = "";
     }

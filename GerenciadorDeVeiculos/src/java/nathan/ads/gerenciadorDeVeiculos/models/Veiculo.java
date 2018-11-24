@@ -1,5 +1,8 @@
 package nathan.ads.gerenciadorDeVeiculos.models;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
 /**
  * @author Nathan
  */
@@ -7,14 +10,15 @@ public class Veiculo {
     
     private Integer veiculoId;
     private String nomeVeiculo;
-    private Integer anoFabricacao;
-    private Integer anoModelo;
-    private Integer kmVeiculo;
+    private long anoFabricacao;
+    private long anoModelo;
+    private long kmVeiculo;
     private double valorVeiculo;
     private String tipoCombustivel;
-    private Integer catVeiculo;
+    private long catVeiculo;
     private String imgVeiculo;
     private String descricao;
+    private Date dataHora;
 
     public Integer getVeiculoId() {
         return veiculoId;
@@ -32,27 +36,27 @@ public class Veiculo {
         this.nomeVeiculo = nomeVeiculo;
     }
 
-    public Integer getAnoFabricacao() {
+    public long getAnoFabricacao() {
         return anoFabricacao;
     }
 
-    public void setAnoFabricacao(Integer anoFabricacao) {
+    public void setAnoFabricacao(long anoFabricacao) {
         this.anoFabricacao = anoFabricacao;
     }
 
-    public Integer getAnoModelo() {
+    public long getAnoModelo() {
         return anoModelo;
     }
 
-    public void setAnoModelo(Integer anoModelo) {
+    public void setAnoModelo(long anoModelo) {
         this.anoModelo = anoModelo;
     }
 
-    public Integer getKmVeiculo() {
+    public long getKmVeiculo() {
         return kmVeiculo;
     }
 
-    public void setKmVeiculo(Integer kmVeiculo) {
+    public void setKmVeiculo(long kmVeiculo) {
         this.kmVeiculo = kmVeiculo;
     }
 
@@ -72,14 +76,14 @@ public class Veiculo {
         this.tipoCombustivel = tipoCombustivel;
     }
 
-    public Integer getCatVeiculo() {
+    public long getCatVeiculo() {
         return catVeiculo;
     }
 
-    public void setCatVeiculo(Integer catVeiculo) {
+    public void setCatVeiculo(long catVeiculo) {
         this.catVeiculo = catVeiculo;
     }
-    
+
     public String getImgVeiculo() {
         return imgVeiculo;
     }
@@ -87,7 +91,7 @@ public class Veiculo {
     public void setImgVeiculo(String imgVeiculo) {
         this.imgVeiculo = imgVeiculo;
     }
-    
+
     public String getDescricao() {
         return descricao;
     }
@@ -96,5 +100,16 @@ public class Veiculo {
         this.descricao = descricao;
     }
 
-    
+    public String getDataHora() {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return format.format(this.dataHora);
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    public void setDataHora(Date dataHora) {
+        this.dataHora = dataHora;
+    }
 }

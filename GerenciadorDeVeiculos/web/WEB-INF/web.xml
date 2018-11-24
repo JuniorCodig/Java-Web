@@ -8,7 +8,6 @@
         <filter-name>ConexaoFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
     <servlet>
         <servlet-name>AnuncioServlet</servlet-name>
         <servlet-class>nathan.ads.gerenciadorDeVeiculos.servlets.AnuncioServlet</servlet-class>
@@ -25,6 +24,10 @@
         <servlet-name>IndexServlet</servlet-name>
         <servlet-class>nathan.ads.gerenciadorDeVeiculos.servlets.IndexServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>imagemServlet</servlet-name>
+        <servlet-class>nathan.ads.gerenciadorDeVeiculos.servlets.imagemServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AnuncioServlet</servlet-name>
         <url-pattern>/anuncio</url-pattern>
@@ -39,7 +42,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
-        <url-pattern>/home</url-pattern>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>imagemServlet</servlet-name>
+        <url-pattern>/imagem</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

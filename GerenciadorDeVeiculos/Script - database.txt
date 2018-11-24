@@ -7,10 +7,10 @@ km_veiculo int not null,
 vl_veiculo decimal(10,2) not null,
 tp_combustivel varchar(50) not null,
 id_categoria int not null,
+imagem varchar(255) not null,
 desc_veiculo varchar(500),
 constraint fk_categoria FOREIGN KEY (id_categoria) references categoria(id_categoria)
 );
-
 
 create table categoria (
 id_categoria int primary key not null auto_increment,
@@ -21,3 +21,4 @@ insert into categoria(titulo) values ("Carros, vans e utilitários");
 insert into categoria(titulo) values ("Motos");
 insert into categoria(titulo) values ("Barcos e Aeronaves");
 insert into categoria(titulo) values ("Ônibus");
+
