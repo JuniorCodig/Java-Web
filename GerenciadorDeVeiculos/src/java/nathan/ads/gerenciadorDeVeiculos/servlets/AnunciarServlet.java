@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -47,7 +48,6 @@ public class AnunciarServlet extends HttpServlet {
             Logger.getLogger(AnunciarServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
         RequestDispatcher dispatcher
                 = req.getRequestDispatcher("/WEB-INF/paginas/anunciar.jsp");
         dispatcher.forward(req, resp);
@@ -56,9 +56,6 @@ public class AnunciarServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
-        String mensagemErro = validaAnuncio(req);
-        
         Veiculo veiculo = new Veiculo();
         try {
             Map<String, Object> parameters = ServletUtil.recuperaParametrosMultipart(req);
@@ -80,7 +77,7 @@ public class AnunciarServlet extends HttpServlet {
             
         } catch (Exception e) {
             e.printStackTrace();
-            req.setAttribute("error", "Erro ao cadastrar o veiculo");
+            req.setAttribute("mensagem-erro", "Erro ao cadastrar o veiculo");
             
             RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/paginas/anunciar.jsp");
             dispatcher.forward(req, resp);
@@ -93,21 +90,20 @@ public class AnunciarServlet extends HttpServlet {
             
             System.out.println("Salvo no banco de dados");
         } catch (Exception e) {
-            req.setAttribute("error", "Não foi possivel salvar no bancos de dados" + e.getMessage());
+            req.setAttribute("mensagem-erro", "Não foi possivel salvar no bancos de dados" + e.getMessage());
             
             RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/paginas/anunciar.jsp");
             dispatcher.forward(req, resp);
         }
         
-        req.setAttribute("sucesso", "Seu anuncio foi salvo com exito.");
+        req.setAttribute("mensagem-erro", "Seu anuncio foi salvo com exito.");
             
-        resp.sendRedirect("index");
+        resp.sendRedirect("anunciar");
         
-     
     }
     
     
-    private String validaAnuncio(HttpServletRequest req){
+    /*private String validaAnuncio(HttpServletRequest req){
         
         Calendar cal = GregorianCalendar.getInstance();
         
@@ -148,6 +144,6 @@ public class AnunciarServlet extends HttpServlet {
         }
         
         return null;
-    }
+    }*/
     
 }

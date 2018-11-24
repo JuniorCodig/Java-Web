@@ -35,19 +35,27 @@ public class CategoriaDao {
         return categorias;
     }
     
-    private Categoria getById(int id) throws SQLException {
+    public Categoria getById(int id) throws SQLException {
         
         String sql = "SELECT * FROM categoria WHERE id_categoria = ?";
         
-        PreparedStatement statement = conexao.prepareStatement(sql);
+        try {
+            Categoria cat = new Categoria();
+            
+            PreparedStatement statement = conexao.prepareStatement(sql);
+            
+            ResultSet result = statement.executeQuery();
         
-        statement.setLong(1, id);
-        
-        ResultSet result = statement.executeQuery();
-        
-        Categoria cat = getByResult(result);
-        
-        return cat;
+            if (result.first()){
+                do {
+                    cat = getByResult(result);
+                } while(result.next());
+            }
+                return cat;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
     
     private static Categoria getByResult (ResultSet result) throws SQLException {

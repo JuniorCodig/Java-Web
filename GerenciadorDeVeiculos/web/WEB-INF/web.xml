@@ -28,6 +28,14 @@
         <servlet-name>imagemServlet</servlet-name>
         <servlet-class>nathan.ads.gerenciadorDeVeiculos.servlets.imagemServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CategoriaServlet</servlet-name>
+        <servlet-class>nathan.ads.gerenciadorDeVeiculos.servlets.CategoriaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BuscarServlet</servlet-name>
+        <servlet-class>nathan.ads.gerenciadorDeVeiculos.servlets.BuscarServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AnuncioServlet</servlet-name>
         <url-pattern>/anuncio</url-pattern>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>imagemServlet</servlet-name>
         <url-pattern>/imagem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CategoriaServlet</servlet-name>
+        <url-pattern>/categoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuscarServlet</servlet-name>
+        <url-pattern>/busca</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

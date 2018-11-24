@@ -305,7 +305,7 @@
                     </div>
                 </div>
 
-                <a href="index" class="btn">Cancelar</a>
+                <a href="index" class="btn btn-danger">Cancelar</a>
                 <button type="submit" class="btn btn-primary">Anunciar</button>
               
             </form>

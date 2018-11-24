@@ -58,7 +58,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index">Veículos</a></li>
-                    <li class="breadcrumb-item"><a href="index?categoria=">amosdoa</a></li>
+                    <li class="breadcrumb-item"><a href="index?categoria="></a></li>
                 </ol>
             </nav>
             

@@ -84,6 +84,52 @@ public class VeiculoDao {
         return null;
     }
     
+    public List<Veiculo> getBySearch(String termoBusca) throws SQLException{
+        String sql = "SELECT * FROM veiculos WHERE nm_veiculo LIKE '%" + termoBusca + "%'";
+        
+        try {
+            List<Veiculo> veiculos = new ArrayList<>();
+        
+            PreparedStatement statement = conexao.prepareStatement(sql);
+               
+            ResultSet result = statement.executeQuery();
+        
+            if(result.first()){
+                do{
+                    Veiculo vei = getVeiculoByResult(result);
+                    veiculos.add(vei);
+                } while(result.next());
+            }
+            return veiculos;
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    public List<Veiculo> getByCategoria (int id) throws SQLException{
+        
+        String sql = "SELECT * FROM veiculos where id_categoria = " + id;
+        
+        try{
+        PreparedStatement statement = conexao.prepareStatement(sql);
+        
+        ResultSet result = statement.executeQuery();
+        
+        List<Veiculo> veiCats = new ArrayList<>();
+        
+        if (result.first()){
+            do{
+                Veiculo veiCat = getVeiculoByResult(result);
+                veiCats.add(veiCat);
+            } while(result.next());
+        }
+        return veiCats;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     public static Veiculo getVeiculoByResult(ResultSet result) throws SQLException{
         
         Veiculo veiculo = new Veiculo();
@@ -98,7 +144,7 @@ public class VeiculoDao {
         veiculo.setCatVeiculo(result.getInt("id_categoria"));
         veiculo.setImgVeiculo(result.getString("imagem"));
         veiculo.setDescricao(result.getString("desc_veiculo"));
-        veiculo.setDataHora(result.getDate("data_postagem"));
+        veiculo.setDataHora(result.getTimestamp("data_postagem"));
         
         return veiculo;
     }

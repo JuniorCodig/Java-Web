@@ -1,20 +1,15 @@
+<%@page import="nathan.ads.gerenciadorDeVeiculos.models.Veiculo"%>
 <%@page import="nathan.ads.gerenciadorDeVeiculos.models.Categoria"%>
 <%@page import="java.util.List"%>
-<%@page import="nathan.ads.gerenciadorDeVeiculos.models.Veiculo"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%
-    
-    String mensagemErro = (String) request.getAttribute("mensagem-erro");
-    
     List<Veiculo> veiculos = (List) request.getAttribute("veiculos");
     
     List<Categoria> categorias = (List) request.getAttribute("categorias");
     
     String buscarVeiculos = request.getParameter("buscar-veiculo");
     
-    if(buscarVeiculos == null){
-        buscarVeiculos = "";
-    }
+    String mensagemErro = (String) request.getAttribute("mensagem-erro");
 %>
 
 <!DOCTYPE html>
@@ -24,7 +19,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SoCarrinhos VeÃ­culos</title>
+    <title>Anúncios de Veículos</title>
 
     <link rel="stylesheet" type="text/css" href="css/fontawesome.all.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -33,7 +28,7 @@
 
     <script>
         function abrirAnuncio(anuncioId) {
-            window.location = "anuncio?anuncio=" + anuncioId;
+            window.location = "anuncio.html?anuncio=" + anuncioId;
         }
     </script>
 </head>
@@ -49,7 +44,7 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="index">InÃ­cio</a>
+                        <a class="nav-link" href="index">Início</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="anunciar">Anunciar</a>
@@ -61,10 +56,18 @@
             </div>
         </nav>
     </header>
-
+    
     <main class="container-fluid">
         <div class="conteudo col-sm-12 col-md-11 col-lg-10">
-
+        <%
+            if (mensagemErro != null){
+        %>
+            <div class="alert alert-danger" role="alert">
+                <%= mensagemErro%>
+            </div>
+        <%
+            }
+        %>
             <div class="row">
                 <div class="menu-esquerdo col-md-auto">
                     <nav>
@@ -92,16 +95,7 @@
                 </div>
                 
                 <div class="col">
-                    <h3>VeÃ­culos anunciados</h3>
-                    <%
-                    if (mensagemErro != null){
-                    %>
-                    <div class="alert alert-danger" role="alert">
-                        <%= mensagemErro%>
-                    </div>
-                    <%
-                        }
-                    %>
+                    <h3>Veículos anunciados</h3>
                     <table class="table table-hover">
                     
                     <% for (Veiculo v : veiculos) { %>
@@ -140,13 +134,5 @@
                     </table>   
                 </div>
             </div>
-
         </div>
     </main>
-
-    <script src="js/jquery-3.3.1.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/scripts-default.js"></script>
-</body>
-</html>
