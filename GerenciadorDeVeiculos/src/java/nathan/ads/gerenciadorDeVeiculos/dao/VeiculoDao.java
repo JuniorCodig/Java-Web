@@ -85,13 +85,22 @@ public class VeiculoDao {
     }
     
     public List<Veiculo> getBySearch(String termoBusca) throws SQLException{
-        String sql = "SELECT * FROM veiculos WHERE nm_veiculo LIKE '%" + termoBusca + "%'";
+        String parametroBusca = "%%";
+        if (termoBusca != null) {
+            parametroBusca = "%" + termoBusca + "%";
+        }
         
+        String sql = "SELECT * FROM veiculos    "
+                    + " WHERE nm_veiculo LIKE ? "
+                    + " OR desc_veiculo LIKE ?";
+        
+        PreparedStatement statement = conexao.prepareStatement(sql);
+        statement.setString(1, parametroBusca);
+        statement.setString(2, parametroBusca);
+
         try {
             List<Veiculo> veiculos = new ArrayList<>();
         
-            PreparedStatement statement = conexao.prepareStatement(sql);
-               
             ResultSet result = statement.executeQuery();
         
             if(result.first()){

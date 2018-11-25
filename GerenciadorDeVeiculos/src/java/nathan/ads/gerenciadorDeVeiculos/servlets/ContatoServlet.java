@@ -57,7 +57,7 @@ public class ContatoServlet extends HttpServlet {
                     dispatcher.forward(req, resp);
                 }
             
-                resp.sendRedirect("/veiculos/contato");
+                resp.sendRedirect("/socarrinhos/contato");
                 
             }else {
                 

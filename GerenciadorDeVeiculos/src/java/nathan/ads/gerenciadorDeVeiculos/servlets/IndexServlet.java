@@ -46,7 +46,7 @@ public class IndexServlet extends HttpServlet {
             e.printStackTrace();
         }
         
-        if(req.getParameter("buscar-produto") != null){
+        if(req.getParameter("buscar-veiculo") != null){
             listByName(req, resp);
             
         } else if (req.getParameter("categoria") != null){

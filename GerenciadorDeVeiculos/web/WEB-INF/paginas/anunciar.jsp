@@ -84,7 +84,7 @@
                 inputValor.classList.add('is-valid');
             }
             
-            if(inputCombustivel.value == "") {
+            if(inputCombustivel.value === null) {
                 formValido = false;
                 inputCombustivel.classList.add('is-invalid');
                 inputCombustivel.classList.remove('is-valid');
