@@ -79,7 +79,7 @@ public class AnunciarServlet extends HttpServlet {
             e.printStackTrace();
             req.setAttribute("mensagem-erro", "Erro ao cadastrar o veiculo");
             
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/paginas/anunciar.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/paginas/anunciar.jsp");
             dispatcher.forward(req, resp);
         }
         

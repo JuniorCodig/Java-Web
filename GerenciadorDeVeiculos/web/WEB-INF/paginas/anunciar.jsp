@@ -3,7 +3,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-  String mensagemErro = (String) request.getAttribute("error");
+  String mensagemErro = (String) request.getAttribute("mensagem-erro");
   
   List<Categoria> categorias = (List<Categoria>) request.getAttribute("categorias");
   
@@ -47,7 +47,8 @@
                 inputTitulo.classList.remove('is-invalid');
                 inputTitulo.classList.add('is-valid');
             }
-            
+                //tentei fazer uma validação mais "valida", 
+                //porem não consegui pelo pouco tempo que restava.
             if(!validaNumber(inputAnoFabricacao.value, 1885, 2019)) {
                 formValido = false;
                 inputAnoFabricacao.classList.add('is-invalid');
@@ -154,17 +155,15 @@
     <main class="container-fluid">
         <div class="conteudo col-sm-12 col-md-11 col-lg-10">
             <h3>Preencha os dados do anúncio</h3>
-                <%
-                    if (mensagemErro != null){
-                %>
-                <div class="alert alert-danger" role="alert">
-                    <%= mensagemErro%>
-                </div>
-                <%
-                    }
-                %>
-            
-            
+            <%
+                if (mensagemErro != null){
+            %>
+            <div class="alert alert-danger" role="alert">
+                <%= mensagemErro %>
+            </div>
+            <%
+                }
+            %>
             <div class="dropdown-divider"></div>
 
             <form name="form-anunciar" enctype="multipart/form-data" accept-charset="utf-8"
